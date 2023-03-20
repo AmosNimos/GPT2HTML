@@ -1,0 +1,22 @@
+file=$1
+extension="${file##*.}"
+if [ "$extension" != "md" ]; then
+    echo "ERROR: File has a different extension: $extension"
+    echo "File must be of type markdown (.md)"
+    return 1
+fi
+
+# Make sure the extension is of type markdown
+if [[ ! "$file" =~ \.md$ ]]; then
+  mv "$file" "${file}.md" && echo "file renamed to ${file}.md"
+  file="${file}.md"
+fi
+
+filename=$(basename "$file" .md)
+
+echo "Processing $file"
+sed -i '/AMOS NIMOS/ { s/.*/\n\n## USER:/ }' $file
+sed -i -e '/## USER:/{n;n;s/^/\n\n## CHATGPT: /}' $file
+
+echo "Converting $file"
+pandoc $file -s -o "${filename}.html"
