@@ -11,3 +11,5 @@ To get the text of the conversation first use Ctrl-a and Ctrl-c to copy the enti
 ~~~
 ./gpt2html filename
 ~~~
+
+Don't forget to leave a ⭐ to let me know if this was helpful 😊.
