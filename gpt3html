@@ -1,0 +1,6 @@
+file=$1
+username=$2
+filename=$(basename "$file")
+sed -i "/$username/ { s/.*/\n\n## USER:/ }" $file
+sed -i -e "/## USER:/{n;n;s/^/\n\n## CHATGPT: /}" $file
+pandoc $file -s -o "${filename}.html"
