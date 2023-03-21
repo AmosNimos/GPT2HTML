@@ -1,4 +1,16 @@
-file=$1
+if [[ -n $1 ]]; then 
+  file=$1
+else
+  read -p "File name:" file
+fi
+
+if [[ -n $2 ]]; then 
+  username=$2
+else
+  read -p "User name:" username
+fi
+
+
 extension="${file##*.}"
 if [ "$extension" != "md" ]; then
     echo "ERROR: File has a different extension: $extension"
@@ -8,15 +20,17 @@ fi
 
 # Make sure the extension is of type markdown
 if [[ ! "$file" =~ \.md$ ]]; then
+  echo "$file does not end with md"
   mv "$file" "${file}.md" && echo "file renamed to ${file}.md"
   file="${file}.md"
+  return 1
 fi
 
 filename=$(basename "$file" .md)
 
 echo "Processing $file"
-sed -i '/AMOS NIMOS/ { s/.*/\n\n## USER:/ }' $file
-sed -i -e '/## USER:/{n;n;s/^/\n\n## CHATGPT: /}' $file
+sed -i "/$username/ { s/.*/\n\n## USER:/ }" $file
+sed -i -e "/## USER:/{n;n;s/^/\n\n## CHATGPT: /}" $file
 
 echo "Converting $file"
 pandoc $file -s -o "${filename}.html"
