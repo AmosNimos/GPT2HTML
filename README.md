@@ -16,4 +16,8 @@ To run the script with arguments you need to enter them in the following order y
 
 If 1 or more arguments are missing the script will prompt the user to enter the missing arguments.
 
+### ⚠️ gpt3html (Experimental Version)
+
+‼️ This gpt3html version aim to be more minimal and compact, disclaimer the gpt3html version of the script has no builtin error warnings, does not use echo statements to describe each steps of the process. does not prompt the user if no arguments are passed, so arguments are <strong>required</strong>.
+
 Don't forget to leave a ⭐ to let me know if this was helpful 😊.
